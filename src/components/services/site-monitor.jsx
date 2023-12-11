@@ -18,7 +18,7 @@ function handleErrorCase(
   backgroundClass,
   statusErrorMessage,
   originalColorClass,
-  originalStatusText
+  originalStatusText,
 ) {
   let statusTitle = originalStatusTitle;
   let statusText = originalStatusText;
@@ -38,7 +38,7 @@ function nodata(
   originalStatusTitle,
   originalColorClass,
   originalStatusText,
-  originalBackgroundClass
+  originalBackgroundClass,
 ) {
   let backgroundClass = originalBackgroundClass;
   let statusTitle = originalStatusTitle;
@@ -59,7 +59,7 @@ function dataerror(
   styleDotChecker,
   originalColorClass,
   originalStatusText,
-  data
+  data,
 ) {
   let colorClass = originalColorClass;
   let statusTitle = originalStatusTitle;
@@ -86,7 +86,7 @@ function handleData(
   data,
   originalColorClass,
   originalStatusText,
-  translation
+  translation,
 ) {
   let colorClass = originalColorClass;
   let statusTitle = originalStatusTitle;
@@ -132,7 +132,6 @@ function getSiteMonitorStatus(error, data, translation, style) {
   } else if (data) {
     handleData(statusText, backgroundClass, statusTitle, translation, styleBasicChecker, styleDotChecker, colorClass);
   }
-
 }
 
 export default function SiteMonitor({ group, service, style }) {
@@ -144,7 +143,7 @@ export default function SiteMonitor({ group, service, style }) {
     error,
     data,
     translation,
-    style
+    style,
   );
   return (
     <div
