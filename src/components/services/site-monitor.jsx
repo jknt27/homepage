@@ -124,13 +124,42 @@ function getSiteMonitorStatus(error, data, translation, style) {
   const styleDotChecker = style === "dot";
   const statusText = "";
   if (error) {
-    handleErrorCase(statusText, translation, statusTitle, statusErrorMessage, styleDotChecker, backgroundClass, colorClass);
+    handleErrorCase(
+      statusText,
+      translation,
+      statusTitle,
+      statusErrorMessage,
+      styleDotChecker,
+      backgroundClass,
+      colorClass,
+    );
   } else if (!data) {
-    nodata(statusText, translation, styleDotChecker, statusTitle, colorClass, backgroundClass);
+    nodata(
+      statusText,
+      translation,
+      styleDotChecker,
+      statusTitle,
+      colorClass,
+      backgroundClass,);
   } else if (dataErrorStatus) {
-    dataerror(statusText, statusTitle, styleBasicChecker, translation, backgroundClass, styleDotChecker, data, colorClass);
+    dataerror(
+      statusText,
+      statusTitle,
+      styleBasicChecker,
+      translation,
+      backgroundClass,
+      styleDotChecker,
+      data,
+      colorClass,);
   } else if (data) {
-    handleData(statusText, backgroundClass, statusTitle, translation, styleBasicChecker, styleDotChecker, colorClass);
+    handleData(
+      statusText,
+      backgroundClass,
+      statusTitle,
+      translation,
+      styleBasicChecker,
+      styleDotChecker,
+      colorClass,);
   }
 }
 
