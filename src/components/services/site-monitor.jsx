@@ -11,7 +11,15 @@ function dothecker(styleDotChecker, backgroundClass, colorClass) {
   return { newBackgroundClass, newcolorClass };
 }
 
-function handleErrorCase(translation, originalStatusTitle, styleDotChecker, backgroundClass, statusErrorMessage, originalColorClass, originalStatusText) {
+function handleErrorCase(
+  translation,
+  originalStatusTitle,
+  styleDotChecker,
+  backgroundClass,
+  statusErrorMessage,
+  originalColorClass,
+  originalStatusText
+) {
   let statusTitle = originalStatusTitle;
   let statusText = originalStatusText;
   let colorClass = originalColorClass;
@@ -24,7 +32,14 @@ function handleErrorCase(translation, originalStatusTitle, styleDotChecker, back
   return { colorClass, newBackgroundClass, statusTitle, statusText };
 }
 
-function nodata(translation, styleDotChecker, originalStatusTitle, originalColorClass, originalStatusText, originalBackgroundClass) {
+function nodata(
+  translation,
+  styleDotChecker,
+  originalStatusTitle,
+  originalColorClass,
+  originalStatusText,
+  originalBackgroundClass
+) {
   let backgroundClass = originalBackgroundClass;
   let statusTitle = originalStatusTitle;
   let statusText = originalStatusText;
@@ -36,7 +51,16 @@ function nodata(translation, styleDotChecker, originalStatusTitle, originalColor
   colorClass = dotheckerresult.colorClass;
   return { colorClass, backgroundClass, statusTitle, statusText };
 }
-function dataerror(originalStatusTitle, styleBasicChecker, translation, originalBackgroundClass, styleDotChecker, originalColorClass, originalStatusText, data) {
+function dataerror(
+  originalStatusTitle,
+  styleBasicChecker,
+  translation,
+  originalBackgroundClass,
+  styleDotChecker,
+  originalColorClass,
+  originalStatusText,
+  data
+) {
   let colorClass = originalColorClass;
   let statusTitle = originalStatusTitle;
   let statusText = originalStatusText;
@@ -54,7 +78,16 @@ function dataerror(originalStatusTitle, styleBasicChecker, translation, original
   return { colorClass, backgroundClass, statusTitle, statusText };
 }
 
-function handleData(originalBackgroundClass, originalStatusTitle, styleBasicChecker, styleDotChecker, data, originalColorClass, originalStatusText, translation) {
+function handleData(
+  originalBackgroundClass,
+  originalStatusTitle,
+  styleBasicChecker,
+  styleDotChecker,
+  data,
+  originalColorClass,
+  originalStatusText,
+  translation
+) {
   let colorClass = originalColorClass;
   let statusTitle = originalStatusTitle;
   let statusText = originalStatusText;
@@ -89,7 +122,7 @@ function getSiteMonitorStatus(error, data, translation, style) {
   const dataErrorStatus = data.status > FORBIDDEN_STATUS_CODE;
   const styleBasicChecker = style === "basic";
   const styleDotChecker = style === "dot";
-  const statusText = '';
+  const statusText = "";
   if (error) {
     handleErrorCase(statusText, translation, statusTitle, statusErrorMessage, styleDotChecker, backgroundClass, colorClass);
   } else if (!data) {
@@ -107,7 +140,12 @@ export default function SiteMonitor({ group, service, style }) {
   const { data, error } = useSWR(`/api/siteMonitor?${new URLSearchParams({ group, service }).toString()}`, {
     refreshInterval: 30000,
   });
-  const { colorClass, backgroundClass, statusTitle, statusText } = getSiteMonitorStatus(error, data, translation, style);
+  const { colorClass, backgroundClass, statusTitle, statusText } = getSiteMonitorStatus(
+    error,
+    data,
+    translation,
+    style
+  );
   return (
     <div
       className={`w-auto text-center rounded-b-[3px] overflow-hidden site-monitor-status ${backgroundClass}`}
