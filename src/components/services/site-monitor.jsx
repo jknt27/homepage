@@ -112,7 +112,6 @@ function handleData(
   return { colorClass, backgroundClass, statusTitle, statusText };
 }
 
-
 function getSiteMonitorStatus(error, data, translation, style) {
   const FORBIDDEN_STATUS_CODE = 403;
   const colorClass = "text-black/20 dark:text-white/40 opacity-20";
