@@ -19,7 +19,7 @@ export default function BookmarksGroup({ bookmarks, layout, disableCollapse }) {
   const transitionClass = isOpen ? "block" : "hidden";
   const toggleButtonIconClass = classNames(
     "transition-all opacity-0 group-hover:opacity-100 ml-auto text-theme-800 dark:text-theme-300 text-xl",
-    isOpen ? "" : "rotate-180"
+    isOpen ? "" : "rotate-180",
   );
 
   return (
@@ -28,7 +28,7 @@ export default function BookmarksGroup({ bookmarks, layout, disableCollapse }) {
       className={classNames(
         "bookmark-group",
         layout?.style === "row" ? "basis-full" : "basis-full md:basis-1/4 lg:basis-1/5 xl:basis-1/6",
-        layout?.header === false ? "flex-1 px-1 -my-1" : "flex-1 p-1"
+        layout?.header === false ? "flex-1 px-1 -my-1" : "flex-1 p-1",
       )}
     >
       <Disclosure defaultOpen>
