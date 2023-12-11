@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classNames from "classnames";
 import { Disclosure, Transition } from "@headlessui/react";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -9,20 +9,37 @@ import ResolvedIcon from "components/resolvedicon";
 
 export default function BookmarksGroup({ bookmarks, layout, disableCollapse }) {
   const panel = useRef();
+  const [isOpen, setIsOpen] = useState(true);
+
+  const togglePanel = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleButtonDisabled = disableCollapse || !layout?.header;
+  const transitionClass = isOpen ? "block" : "hidden";
+  const toggleButtonIconClass = classNames(
+    "transition-all opacity-0 group-hover:opacity-100 ml-auto text-theme-800 dark:text-theme-300 text-xl",
+    isOpen ? "" : "rotate-180"
+  );
+
   return (
     <div
       key={bookmarks.name}
       className={classNames(
         "bookmark-group",
         layout?.style === "row" ? "basis-full" : "basis-full md:basis-1/4 lg:basis-1/5 xl:basis-1/6",
-        layout?.header === false ? "flex-1 px-1 -my-1" : "flex-1 p-1",
+        layout?.header === false ? "flex-1 px-1 -my-1" : "flex-1 p-1"
       )}
     >
       <Disclosure defaultOpen>
-        {({ open }) => (
+        {() => (
           <>
             {layout?.header !== false && (
-              <Disclosure.Button disabled={disableCollapse} className="flex w-full select-none items-center group">
+              <Disclosure.Button
+                disabled={toggleButtonDisabled}
+                className="flex w-full select-none items-center group"
+                onClick={togglePanel}
+              >
                 {layout?.icon && (
                   <div className="flex-shrink-0 mr-2 w-7 h-7 bookmark-group-icon">
                     <ResolvedIcon icon={layout.icon} />
@@ -31,18 +48,12 @@ export default function BookmarksGroup({ bookmarks, layout, disableCollapse }) {
                 <h2 className="text-theme-800 dark:text-theme-300 text-xl font-medium bookmark-group-name">
                   {bookmarks.name}
                 </h2>
-                <MdKeyboardArrowDown
-                  className={classNames(
-                    disableCollapse ? "hidden" : "",
-                    "transition-all opacity-0 group-hover:opacity-100 ml-auto text-theme-800 dark:text-theme-300 text-xl",
-                    open ? "" : "rotate-180",
-                  )}
-                />
+                <MdKeyboardArrowDown className={toggleButtonIconClass} />
               </Disclosure.Button>
             )}
             <Transition
               // Otherwise the transition group does display: none and cancels animation
-              className="!block"
+              className={transitionClass}
               unmount={false}
               beforeLeave={() => {
                 panel.current.style.height = `${panel.current.scrollHeight}px`;
