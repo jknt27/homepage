@@ -134,8 +134,7 @@ function getSiteMonitorStatus(error, data, translation, style) {
       colorClass,
     );
   } else if (!data) {
-    nodata(
-      statusText, translation, styleDotChecker, statusTitle, colorClass, backgroundClass);
+    nodata(statusText, translation, styleDotChecker, statusTitle, colorClass, backgroundClass);
   } else if (dataErrorStatus) {
     dataerror(
       statusText,
@@ -173,4 +172,3 @@ export default function SiteMonitor({ group, service, style }) {
     </div>
   );
 }
-
