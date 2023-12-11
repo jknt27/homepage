@@ -7,17 +7,13 @@ import { SettingsContext } from "utils/contexts/settings";
 export default function Container({ error = false, children, service }) {
   const { settings } = useContext(SettingsContext);
 
-  if (error) {
-    if (settings.hideErrors || service.widget.hide_errors) {
-      return null;
-    }
-
+  if (error && !(settings.hideErrors || service.widget.hide_errors)) {
     return <Error service={service} error={error} />;
   }
 
   const childrenArray = Array.isArray(children) ? children : [children];
 
-  let visibleChildren = childrenArray;
+  let filteredChildren = childrenArray;
   let fields = service?.widget?.fields;
   if (typeof fields === "string") fields = JSON.parse(service.widget.fields);
   const type = service?.widget?.type;
@@ -27,7 +23,7 @@ export default function Container({ error = false, children, service }) {
     // fields: [ "resources.cpu", "resources.mem", "field"]
     // or even
     // fields: [ "resources.cpu", "widget_type.field" ]
-    visibleChildren = childrenArray?.filter((child) =>
+    filteredChildren = childrenArray?.filter((child) =>
       fields.some((field) => {
         let fullField = field;
         if (!field.includes(".")) {
@@ -38,5 +34,5 @@ export default function Container({ error = false, children, service }) {
     );
   }
 
-  return <div className="relative flex flex-row w-full service-container">{visibleChildren}</div>;
+  return <div className="relative flex flex-row w-full service-container">{filteredChildren}</div>;
 }
