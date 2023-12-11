@@ -135,12 +135,7 @@ function getSiteMonitorStatus(error, data, translation, style) {
     );
   } else if (!data) {
     nodata(
-      statusText,
-      translation,
-      styleDotChecker,
-      statusTitle,
-      colorClass,
-      backgroundClass,);
+      statusText, translation, styleDotChecker, statusTitle, colorClass, backgroundClass);
   } else if (dataErrorStatus) {
     dataerror(
       statusText,
@@ -150,16 +145,10 @@ function getSiteMonitorStatus(error, data, translation, style) {
       backgroundClass,
       styleDotChecker,
       data,
-      colorClass,);
+      colorClass,
+    );
   } else if (data) {
-    handleData(
-      statusText,
-      backgroundClass,
-      statusTitle,
-      translation,
-      styleBasicChecker,
-      styleDotChecker,
-      colorClass,);
+    handleData(statusText, backgroundClass, statusTitle, translation, styleBasicChecker, styleDotChecker, colorClass);
   }
 }
 
