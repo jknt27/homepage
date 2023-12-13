@@ -20,7 +20,7 @@ export default function QuickLaunch({
     ? settings.quicklaunch
     : { searchDescriptions: false, hideVisitURL: false };
 
-  const searchField = useRef();
+  const searchInputRef = useRef();
 
   const [results, setResults] = useState([]);
   const [currentItemIndex, setCurrentItemIndex] = useState(null);
@@ -137,12 +137,12 @@ export default function QuickLaunch({
     }
 
     if (isOpen) {
-      searchField.current.focus();
+      searchInputRef.current.focus();
       document.body.addEventListener("click", handleBackdropClick);
       setHidden(false);
     } else {
       document.body.removeEventListener("click", handleBackdropClick);
-      searchField.current.blur();
+      searchInputRef.current.blur();
       setTimeout(() => {
         setHidden(true);
       }, 300); // disable on close
@@ -191,7 +191,7 @@ export default function QuickLaunch({
               )}
               type="text"
               autoCorrect="false"
-              ref={searchField}
+              ref={searchInputRef}
               value={searchString}
               onChange={handleSearchChange}
               onKeyDown={handleSearchKeyDown}
